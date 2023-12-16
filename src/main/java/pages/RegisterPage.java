@@ -1,2 +1,69 @@
-package pages;public class RegisterPage {
+package pages;
+
+import org.apache.commons.lang3.RandomStringUtils;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
+
+public class RegisterPage {
+
+    public static final String REGISTER_URL = "http://training.skillo-bg.com:4200/users/register";
+
+    public WebDriver driver;
+
+    @FindBy(tagName = "h4")
+    private WebElement singInText;
+
+    @FindBy(xpath = "//*[@formcontrolname='username']")
+    private WebElement userNameField;
+
+
+    @FindBy(xpath = "//*[@formcontrolname='email']")
+    private WebElement emailField;
+
+    @FindBy(xpath = "//*[@formcontrolname='password']")
+    private WebElement passwordField;
+
+    @FindBy(xpath = "//*[@formcontrolname='confirmPassword']")
+    private WebElement confirmPassField;
+
+    @FindBy(id = "sign-in-button")
+    private WebElement singInButton;
+
+    @FindBy
+    private WebElement toastUserRegistrated;
+
+    public void registrarNewUser() {
+        //   userNameField.sendKeys(generateRandomAlphabeticString(7,7));
+        userNameField.sendKeys("дсдв");
+        //     emailField.sendKeys(generateRandomEmail(7, 8));
+        //    passwordField.sendKeys("test123");
+        //  confirmPassField.sendKeys("test123");
+
+    }
+
+    public String generateRandomEmail(int minLengthInclusive, int maxLengthInclusive) {
+        return generateRandomAlphabeticString(minLengthInclusive, maxLengthInclusive) + "@gmail.com";
+    }
+
+    private String generateRandomAlphabeticString(int minLengthInclusive, int maxLengthInclusive) {
+        return RandomStringUtils.randomAlphanumeric(minLengthInclusive, maxLengthInclusive);
+    }
+
+
+
+//    public void isVisibleSinIn() {
+//        ExpectedConditions.visibilityOf(singInText);
+//    }
+
+    public boolean isURLRegister() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        return wait.until((ExpectedConditions.urlToBe(REGISTER_URL)));
+    }
+
+
 }
