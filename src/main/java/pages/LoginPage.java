@@ -1,5 +1,6 @@
 package pages;
 
+import dev.failsafe.internal.util.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -21,11 +22,14 @@ public class LoginPage {
     @FindBy(id = "defaultLoginFormPassword")
     private WebElement passwordInput;
 
+    @FindBy(xpath = "//*[@formcontrolname='rememberMe']")
+    private WebElement rememberMeCheckbox;
+
     @FindBy(id = "sign-in-button")
     private WebElement singInButton;
 
-    @FindBy()
-    private WebElement toastUserNotFound;
+    @FindBy(id = "toast-container")
+    private WebElement toast;
 
     @FindBy(xpath = "//a[contains(text(), 'Register')]")
     private WebElement registerButton;
@@ -38,28 +42,30 @@ public class LoginPage {
     public void login(String username, String password) {
         usernameInput.sendKeys(username);
         passwordInput.sendKeys(password);
+        rememberMeCheckbox.click();
         singInButton.click();
     }
 
-    public void testWrongEmail() {
+    public void enterWrongCredentials() {
         usernameInput.sendKeys("Teddy12345");
         passwordInput.sendKeys("test123");
         singInButton.click();
-    }
-
-    public void testWrongPassword() {
-        usernameInput.sendKeys("Teddy123");
-        passwordInput.sendKeys("123test");
-        singInButton.click();
-    }
-
-    public void clickRegister() {
-        registerButton.click();
     }
 
     public boolean isUserLoggedIn() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         return wait.until(ExpectedConditions.urlToBe(LoginPage.PAGE_URL));
     }
+
+
+    public void clickRegister() {
+        registerButton.click();
+    }
+
+    public String getToastMessage() {
+        String toastMessage = toast.getText();
+        return toastMessage;
+    }
+
 
 }

@@ -1,9 +1,7 @@
+import com.beust.ah.A;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.Header;
-import pages.HomePage;
-import pages.LoginPage;
-import pages.PostPage;
+import pages.*;
 
 import java.io.File;
 
@@ -13,44 +11,57 @@ public class TestFunctionalities extends TestBase {
     public void testLogin(String username, String password, File uplPic, String postCaption) {
 
         LoginPage loginPage = new LoginPage(getDriver());
+        //assert that url navigates login page
+        Assert.assertTrue(loginPage.isUserLoggedIn());
+        //enter registered username and password
         loginPage.login(username, password);
-        Assert.assertTrue(loginPage.isUserLoggedIn(), "Successful login!");
+        //verify that the toast "Successful login!" appears
+        Assert.assertEquals("Successful login!", loginPage.getToastMessage());
+
     }
 
     @Test(dataProvider = "loginData", dataProviderClass = TestBase.class)
     public void createNewPost(String username, String password, File uplPic, String postCaption) {
 
         LoginPage loginPage = new LoginPage(getDriver());
+        Assert.assertTrue(loginPage.isUserLoggedIn());
         loginPage.login(username, password);
-        Assert.assertTrue(loginPage.isUserLoggedIn(), "Successful login!");
+        Assert.assertEquals("Successful login!", loginPage.getToastMessage());
+
 
         Header header = new Header(super.getDriver());
+        //click on "New post" button
         header.clickNewPost();
 
         PostPage postPage = new PostPage(super.getDriver());
+        //assert that url navigates to create post page
         Assert.assertTrue(postPage.isUrlLoaded());
-
+        //upload an image
         postPage.uploadImage(uplPic);
-        Assert.assertTrue(postPage.isUrlLoaded(), "Image is not visible!");
-
+        //assert that image name is the same with uploaded name
         Assert.assertEquals(postPage.getImageName(), uplPic.getName());
-
+        //add text on caption field
         postPage.addCaption(postCaption);
+        //click on "Submit" button
         postPage.clickSubmitButton();
+        //verify that the image is uploaded
 
     }
+//to verify the uploaded image
 
     @Test(dataProvider = "loginData", dataProviderClass = TestBase.class)
     public void testLogOut(String username, String password, File uplPic, String postCaption) {
 
         LoginPage loginPage = new LoginPage(getDriver());
+        Assert.assertTrue(loginPage.isUserLoggedIn());
         loginPage.login(username, password);
-        Assert.assertTrue(loginPage.isUserLoggedIn(), "Successful login!");
 
         Header header = new Header(getDriver());
+        //click on "Log out" button
         Header.clickLogout();
-        Assert.assertTrue(header.isUserLoggedOut(), "Successful logout!");
-
+        //verify that the toast "Logged out" appears
+        Assert.assertEquals("Successful logout!\n" +
+                "Successful login!", loginPage.getToastMessage());
 
     }
 
@@ -58,21 +69,21 @@ public class TestFunctionalities extends TestBase {
     public void testLikeAPostWithoutLogin() {
 
         HomePage homePage = new HomePage(super.getDriver());
+        //open Home page
         homePage.navigateTo();
-
-        Assert.assertTrue(homePage.isUrlLoaded(), "Home");
-
+        //verify that the user is on Home page
+        Assert.assertTrue(homePage.isUrlLoaded());
+        //click on the first image
         homePage.clickOnTheFirstPost();
-
-        Assert.assertTrue(homePage.isVisibleCommentField(), "Comment here");
-
+        //verify that the comment field is visible
+        Assert.assertTrue(homePage.isVisibleCommentField());
+        //click on like button
         homePage.clickOnLikeButton();
-
-        homePage.isToastVisible();
-
-        Assert.assertTrue(homePage.isToastVisible(), "You must login");
+        //verify that the toast "You must login" appears
+        LoginPage loginPage = new LoginPage(super.getDriver());
+        Assert.assertEquals("You must login\n" +
+                "You must login", loginPage.getToastMessage());
     }
-
 
 
     @Test
@@ -80,24 +91,24 @@ public class TestFunctionalities extends TestBase {
 
         //navigate to Login Page
         LoginPage loginPage = new LoginPage(super.getDriver());
+        Assert.assertTrue(loginPage.isUserLoggedIn());
+        //enter wrong credentials and click SingIn button
+        loginPage.enterWrongCredentials();
+        //verify that the toast message that appears is correct
+        Assert.assertEquals("User not found", loginPage.getToastMessage());
 
-        //enter wrong email/username and click SingIn button
-        loginPage.testWrongEmail();
-
-        //assert toast - "User not found"
-
-    } //assert the toast
+    }
 
 
     @Test
     public void testViewProfileWithoutLogin() {
 
         HomePage homePage = new HomePage(super.getDriver());
+        //open Home page
         homePage.navigateTo();
-
-        Assert.assertTrue(homePage.isUrlLoaded(), "Login");
-
-        //click on the first profile name
+        //assert that Home page url is loaded
+        Assert.assertTrue(homePage.isUrlLoaded());
+        //click on the first username
 
         //assert that the toast "You must log in" is visible
 
@@ -108,11 +119,20 @@ public class TestFunctionalities extends TestBase {
     @Test
     public void testRegisterNewUser() {
 
+        //navigate to login page
+        LoginPage loginPage = new LoginPage(super.getDriver());
+        loginPage.clickRegister();
 
+        RegisterPage registerPage = new RegisterPage(super.getDriver());
+        //verify that the user is on the register page
+        registerPage.isURLRegister();
+        //fill all the fields and click "Sing In" button
+        registerPage.registerNewUser();
 
-    }  //started
+        //verify that the toast "Successful register!" appears
+        Assert.assertEquals("Successful register!", registerPage.getToastMessageRegister());
 
-
+    }
 
 
 

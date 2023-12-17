@@ -10,9 +10,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 public class Header {
-
-    public static final String LOGOUT_URL = "http://training.skillo-bg.com:4200/users/login";
-
     private final WebDriver driver;
 
     @FindBy(id = "nav-link-profile")
@@ -45,10 +42,7 @@ public class Header {
         profileLink.click();
     }
 
-    public boolean isUserLoggedOut() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-        return wait.until(ExpectedConditions.urlToBe(LOGOUT_URL));
-    }
+
 
 
 }

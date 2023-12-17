@@ -41,12 +41,6 @@ public class PostPage {
         return wait.until(ExpectedConditions.urlContains(PostPage.PostPage_URL));
     }
 
-    public void uploadImage() {
-        uploadImageField.sendKeys();
-
-    }
-
-
     public void uploadImage(File pathPic) {
         uploadImageField.sendKeys(pathPic.getAbsolutePath());
     }

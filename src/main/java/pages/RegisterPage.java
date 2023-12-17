@@ -4,6 +4,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -34,16 +35,20 @@ public class RegisterPage {
     @FindBy(id = "sign-in-button")
     private WebElement singInButton;
 
-    @FindBy
-    private WebElement toastUserRegistrated;
+    @FindBy(id = "toast-container")
+    private WebElement toast;
 
-    public void registrarNewUser() {
-        //   userNameField.sendKeys(generateRandomAlphabeticString(7,7));
-        userNameField.sendKeys("дсдв");
-        //     emailField.sendKeys(generateRandomEmail(7, 8));
-        //    passwordField.sendKeys("test123");
-        //  confirmPassField.sendKeys("test123");
+    public RegisterPage(WebDriver driver) {
+        this.driver = driver;
+        PageFactory.initElements(driver, this);
+    }
 
+    public void registerNewUser() {
+        userNameField.sendKeys(generateRandomAlphabeticString(7, 7));
+        emailField.sendKeys(generateRandomEmail(7, 8));
+        passwordField.sendKeys("test123");
+        confirmPassField.sendKeys("test123");
+        singInButton.click();
     }
 
     public String generateRandomEmail(int minLengthInclusive, int maxLengthInclusive) {
@@ -55,14 +60,14 @@ public class RegisterPage {
     }
 
 
-
-//    public void isVisibleSinIn() {
-//        ExpectedConditions.visibilityOf(singInText);
-//    }
-
     public boolean isURLRegister() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         return wait.until((ExpectedConditions.urlToBe(REGISTER_URL)));
+    }
+
+    public String getToastMessageRegister() {
+        String toastMessage = toast.getText();
+     return toastMessage;
     }
 
 

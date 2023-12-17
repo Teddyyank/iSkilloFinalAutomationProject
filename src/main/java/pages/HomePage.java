@@ -1,6 +1,5 @@
 package pages;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,14 +9,13 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
-import java.util.List;
 
 public class HomePage {
     public static final String HOME_URL = "http://training.skillo-bg.com:4200/posts/all";
     private WebDriver driver;
 
     @FindBy(xpath = "(//div[@class='post-feed-img'])[1]")
-    private WebElement selectFirstPost;
+    private WebElement likeFirstPost;
 
     @FindBy(xpath = "//*[@class='like far fa-heart fa-2x']")
     private WebElement selectLikeButton;
@@ -26,7 +24,10 @@ public class HomePage {
     private WebElement commentField;
 
     @FindBy(id = "toast-container")
-    private WebElement toastYouMustLogin;
+    private WebElement toast;
+
+    @FindBy(id = "//*[@id='nav-link-profile']")
+    private WebElement profileButton;
 
 
     public HomePage(WebDriver driver) {
@@ -44,12 +45,12 @@ public class HomePage {
     }
 
     public void clickOnTheFirstPost() {
-        selectFirstPost.click();
+        likeFirstPost.click();
     }
 
     public void clickOnLikeButton() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.elementToBeClickable(selectFirstPost));
+        wait.until(ExpectedConditions.elementToBeClickable(likeFirstPost));
         selectLikeButton.click();
     }
 
@@ -63,22 +64,20 @@ public class HomePage {
         }
     }
 
-    public boolean isToastVisible() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
-        try {
-            wait.until(ExpectedConditions.visibilityOf(toastYouMustLogin));
-            return true;
-        } catch (TimeoutException exception) {
-            return false;
-        }
 
-    }
+
 
     //test to view a profile without login
 
     @FindBy(css = "a.post-user")
     private WebElement userSelector;
 
+
+
+//    public boolean isProfileButtonVisible() {
+//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+//        return wait.until((ExpectedConditions.
+//    }
 
 
 }
