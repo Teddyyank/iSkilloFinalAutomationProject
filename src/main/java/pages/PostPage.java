@@ -1,5 +1,6 @@
 package pages;
 
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -28,8 +29,14 @@ public class PostPage {
     @FindBy(name = "caption")
     private WebElement captionField;
 
+    @FindBy(xpath = "//*[@class='post-status-label custom-control-label active']")
+    private WebElement switchButton;
+
     @FindBy(xpath = "//*[@id='create-post']")
     private WebElement submitButton;
+
+    @FindBy(xpath = "xpath=//div[@id='toast-container']/div/div")
+    private WebElement toast;
 
     public PostPage(WebDriver driver) {
         this.driver = driver;
@@ -60,8 +67,19 @@ public class PostPage {
         captionField.sendKeys("content added!");
     }
 
+    public void clickOnSwitchButton() {
+        switchButton.click();
+    }
+
     public void clickSubmitButton() {
         submitButton.click();
     }
+
+    public String getToastMessage() {
+        String toastMessage = toast.getText();
+        return toastMessage;
+    }
+
+
 
 }

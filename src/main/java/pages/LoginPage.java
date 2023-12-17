@@ -62,6 +62,7 @@ public class LoginPage {
         registerButton.click();
     }
 
+
     public String getToastMessage() {
         String toastMessage = toast.getText();
         return toastMessage;

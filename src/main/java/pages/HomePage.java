@@ -29,6 +29,9 @@ public class HomePage {
     @FindBy(id = "//*[@id='nav-link-profile']")
     private WebElement profileButton;
 
+    @FindBy(xpath = "(//a[@class='post-user'])[1]")
+    private WebElement selectFirstUserName;
+
 
     public HomePage(WebDriver driver) {
         this.driver = driver;
@@ -62,6 +65,16 @@ public class HomePage {
         } catch (TimeoutException exception) {
             return false;
         }
+    }
+
+    public void clickOnFirstUserName() {
+        selectFirstUserName.click();
+    }
+
+
+    public String getToastMessage() {
+        String toastMessage = toast.getText();
+        return toastMessage;
     }
 
 

@@ -28,7 +28,6 @@ public class TestFunctionalities extends TestBase {
         loginPage.login(username, password);
         Assert.assertEquals("Successful login!", loginPage.getToastMessage());
 
-
         Header header = new Header(super.getDriver());
         //click on "New post" button
         header.clickNewPost();
@@ -42,12 +41,19 @@ public class TestFunctionalities extends TestBase {
         Assert.assertEquals(postPage.getImageName(), uplPic.getName());
         //add text on caption field
         postPage.addCaption(postCaption);
+        //click on "Switch" button to make the post private
+        postPage.clickOnSwitchButton();
         //click on "Submit" button
         postPage.clickSubmitButton();
-        //verify that the image is uploaded
+        //verify toast "Post created" is visible
+     //   Assert.assertEquals("Post created", postPage.getToastMessage());
+
+        //verify that the post is created
+
+
 
     }
-//to verify the uploaded image
+
 
     @Test(dataProvider = "loginData", dataProviderClass = TestBase.class)
     public void testLogOut(String username, String password, File uplPic, String postCaption) {
@@ -109,11 +115,11 @@ public class TestFunctionalities extends TestBase {
         //assert that Home page url is loaded
         Assert.assertTrue(homePage.isUrlLoaded());
         //click on the first username
+        homePage.clickOnFirstUserName();
+        //assert that the toast message is correct
+        Assert.assertEquals("You must be logged in in order to see this page!", homePage.getToastMessage());
 
-        //assert that the toast "You must log in" is visible
-
-
-    } //not ready
+    }
 
 
     @Test
