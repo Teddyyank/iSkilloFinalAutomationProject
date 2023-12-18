@@ -1,4 +1,4 @@
-import com.beust.ah.A;
+
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.*;
@@ -12,7 +12,7 @@ public class TestFunctionalities extends TestBase {
 
         LoginPage loginPage = new LoginPage(getDriver());
         //assert that url navigates login page
-        Assert.assertTrue(loginPage.isUserLoggedIn());
+        Assert.assertTrue(loginPage.isUserLoggedIn(), "Url is different!");
         //enter registered username and password
         loginPage.login(username, password);
         //verify that the toast "Successful login!" appears
@@ -34,7 +34,7 @@ public class TestFunctionalities extends TestBase {
 
         PostPage postPage = new PostPage(super.getDriver());
         //assert that url navigates to create post page
-        Assert.assertTrue(postPage.isUrlLoaded());
+        Assert.assertTrue(postPage.isUrlLoaded(), "Url is not loaded!");
         //upload an image
         postPage.uploadImage(uplPic);
         //assert that image name is the same with uploaded name
@@ -45,12 +45,11 @@ public class TestFunctionalities extends TestBase {
         postPage.clickOnSwitchButton();
         //click on "Submit" button
         postPage.clickSubmitButton();
+        ProfilePage profilePage = new ProfilePage(super.getDriver());
+        //verify that the url is on profile page
+        Assert.assertTrue(profilePage.isUrlLoaded(), "Url is not loaded");
         //verify toast "Post created" is visible
-     //   Assert.assertEquals("Post created", postPage.getToastMessage());
-
-        //verify that the post is created
-
-
+     //   Assert.assertEquals("Post created", profilePage.getToastMessage());
 
     }
 
@@ -82,7 +81,7 @@ public class TestFunctionalities extends TestBase {
         //click on the first image
         homePage.clickOnTheFirstPost();
         //verify that the comment field is visible
-        Assert.assertTrue(homePage.isVisibleCommentField());
+        Assert.assertTrue(homePage.isVisibleCommentField(), "Comment field is not visible!");
         //click on like button
         homePage.clickOnLikeButton();
         //verify that the toast "You must login" appears
@@ -139,7 +138,6 @@ public class TestFunctionalities extends TestBase {
         Assert.assertEquals("Successful register!", registerPage.getToastMessageRegister());
 
     }
-
 
 
 }

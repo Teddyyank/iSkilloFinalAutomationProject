@@ -4,10 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
 
 public class Header {
     private final WebDriver driver;
@@ -21,15 +18,9 @@ public class Header {
     @FindBy(xpath = "//*[@class='fas fa-sign-out-alt fa-lg']")
     private static WebElement logoutButton;
 
-
     public Header(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
-    }
-
-    public void isLogoutButtonLoaded() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.elementToBeClickable(logoutButton));
     }
 
     public void clickNewPost() { newPostButton.click();}
@@ -37,12 +28,5 @@ public class Header {
     public static void clickLogout() {
         logoutButton.click();
     }
-
-    public static void clickOnProfile() {
-        profileLink.click();
-    }
-
-
-
 
 }

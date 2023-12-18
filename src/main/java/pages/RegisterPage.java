@@ -16,12 +16,8 @@ public class RegisterPage {
 
     public WebDriver driver;
 
-    @FindBy(tagName = "h4")
-    private WebElement singInText;
-
     @FindBy(xpath = "//*[@formcontrolname='username']")
     private WebElement userNameField;
-
 
     @FindBy(xpath = "//*[@formcontrolname='email']")
     private WebElement emailField;

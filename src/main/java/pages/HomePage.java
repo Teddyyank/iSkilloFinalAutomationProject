@@ -26,9 +26,6 @@ public class HomePage {
     @FindBy(id = "toast-container")
     private WebElement toast;
 
-    @FindBy(id = "//*[@id='nav-link-profile']")
-    private WebElement profileButton;
-
     @FindBy(xpath = "(//a[@class='post-user'])[1]")
     private WebElement selectFirstUserName;
 
@@ -76,21 +73,6 @@ public class HomePage {
         String toastMessage = toast.getText();
         return toastMessage;
     }
-
-
-
-
-    //test to view a profile without login
-
-    @FindBy(css = "a.post-user")
-    private WebElement userSelector;
-
-
-
-//    public boolean isProfileButtonVisible() {
-//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-//        return wait.until((ExpectedConditions.
-//    }
 
 
 }

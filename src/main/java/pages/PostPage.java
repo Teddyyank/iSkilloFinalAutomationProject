@@ -1,6 +1,5 @@
 package pages;
 
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -35,9 +34,6 @@ public class PostPage {
     @FindBy(xpath = "//*[@id='create-post']")
     private WebElement submitButton;
 
-    @FindBy(xpath = "xpath=//div[@id='toast-container']/div/div")
-    private WebElement toast;
-
     public PostPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
@@ -57,7 +53,6 @@ public class PostPage {
         return wait.until(ExpectedConditions.visibilityOf(uploaded)).isDisplayed();
     }
 
-
     public String getImageName() {
         String imgName = uploadedPath.getAttribute("placeholder");
         return  imgName;
@@ -74,12 +69,6 @@ public class PostPage {
     public void clickSubmitButton() {
         submitButton.click();
     }
-
-    public String getToastMessage() {
-        String toastMessage = toast.getText();
-        return toastMessage;
-    }
-
 
 
 }
