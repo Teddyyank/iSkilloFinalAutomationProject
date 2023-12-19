@@ -48,11 +48,6 @@ public class PostPage {
         uploadImageField.sendKeys(pathPic.getAbsolutePath());
     }
 
-    public boolean isImgVisible() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-        return wait.until(ExpectedConditions.visibilityOf(uploaded)).isDisplayed();
-    }
-
     public String getImageName() {
         String imgName = uploadedPath.getAttribute("placeholder");
         return  imgName;

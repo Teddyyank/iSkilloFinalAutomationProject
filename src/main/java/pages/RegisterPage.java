@@ -66,5 +66,4 @@ public class RegisterPage {
      return toastMessage;
     }
 
-
 }

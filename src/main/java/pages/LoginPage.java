@@ -56,15 +56,17 @@ public class LoginPage {
         return wait.until(ExpectedConditions.urlToBe(LoginPage.PAGE_URL));
     }
 
-
     public void clickRegister() {
         registerButton.click();
     }
 
-
     public String getToastMessage() {
         String toastMessage = toast.getText();
         return toastMessage;
+    }
+
+    public void clickSignInButton() {
+        singInButton.click();
     }
 
 

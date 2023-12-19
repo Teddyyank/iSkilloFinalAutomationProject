@@ -1,3 +1,5 @@
+package tests;
+
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
@@ -45,6 +47,8 @@ public class TestBase {
         LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
     }
 
+    // public void logInUser
+
     @AfterMethod
     public void tearDown(ITestResult testResult) {
         takeScreenshot(testResult);
@@ -67,7 +71,7 @@ public class TestBase {
             try {
                 TakesScreenshot takesScreenshot = (TakesScreenshot) driver;
                 File screenshot = takesScreenshot.getScreenshotAs(OutputType.FILE);
-                String testName = takeResult.getTestName();
+             //   String testName = takeResult.getTestName();
                 FileUtils.copyFile(screenshot, imgFile);
             } catch (IOException e) {
                 System.out.println("Unable to create screenshot file: " + e.getMessage());
