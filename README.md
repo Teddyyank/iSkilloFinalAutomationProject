@@ -1,11 +1,11 @@
 Java Maven Test Automation Project 
 
-This project is focused on automating tests for the website http://training.skillo-bg.com:4200/posts/all using TestNG and Selenium WebDriver. 
+This project is focused on automating tests for the web application "http://training.skillo-bg.com:4200/posts/all" using TestNG and Selenium WebDriver. 
 The goal is to ensure the reliability and functionality of the web application by automating key test scenarios.
 The project follows the Page Object Model design pattern and Page Factory. 
 
 Tests that project contains are: 
-1. Test for Login that verify the user can login with valid credenshals
+1. Test for Login that verifies the user can login to the website with valid credenshals
 2. Test for creating new post, after Login the user can create new post 
 3. Test Logout, after Login the user can Logout successfully 
 4. Test for opening a post and click on like button without login, verifies the toast "You must login"
