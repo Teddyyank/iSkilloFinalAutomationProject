@@ -50,7 +50,7 @@ public class LoginPage {
         singInButton.click();
     }
 
-    public void waitUsernameField(String text) {
+    public void waitUsernameField() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.textToBePresentInElementValue(usernamePopulated, "Teddy123"));
     }

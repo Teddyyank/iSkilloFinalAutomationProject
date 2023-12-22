@@ -2,9 +2,7 @@ package tests;
 
 import org.testng.annotations.Test;
 import pages.*;
-
 import java.io.File;
-
 import static org.testng.Assert.*;
 
 public class TestFunctionalities extends TestBase {
@@ -17,7 +15,7 @@ public class TestFunctionalities extends TestBase {
         LoginPage loginPage = new LoginPage(getDriver());
         assertTrue(loginPage.isUserLoggedIn(), "Url is different!");
         loginPage.login(username, password);
-        loginPage.waitUsernameField("Teddy123");
+        loginPage.waitUsernameField();
         assertEquals("Successful login!", loginPage.getToastMessage());
 
     }

@@ -12,7 +12,7 @@ import java.time.Duration;
 
 public class HomePage {
     public static final String HOME_URL = "http://training.skillo-bg.com:4200/posts/all";
-    private WebDriver driver;
+    private final WebDriver driver;
 
     @FindBy(xpath = "//*[@id='nav-link-login']")
     private WebElement loginButton;

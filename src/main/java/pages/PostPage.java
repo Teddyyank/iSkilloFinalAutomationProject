@@ -19,9 +19,6 @@ public class PostPage {
     @FindBy(css = ".file[type=\"file\"]")
     private WebElement uploadImageField;
 
-    @FindBy(css = "img.image-preview")
-    private WebElement uploaded;
-
     @FindBy(css = "input.input-lg")
     private WebElement uploadedPath;
 
