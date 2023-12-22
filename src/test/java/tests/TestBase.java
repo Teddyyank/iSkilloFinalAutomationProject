@@ -31,7 +31,6 @@ public class TestBase {
     @BeforeSuite
     public void setUp() {
         WebDriverManager.chromedriver().setup();
-
     }
 
     @BeforeMethod
@@ -44,13 +43,13 @@ public class TestBase {
 
     }
 
-    @AfterMethod
-    public void tearDown(ITestResult testResult) {
-        takeScreenshot(testResult);
-        if (driver != null) {
-            driver.quit();
-        }
-    }
+//    @AfterMethod
+//    public void tearDown(ITestResult testResult) {
+//        takeScreenshot(testResult);
+//        if (driver != null) {
+//            driver.quit();
+//        }
+//    }
 
 
     @DataProvider(name = "loginData")

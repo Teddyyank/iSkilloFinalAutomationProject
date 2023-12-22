@@ -62,8 +62,7 @@ public class RegisterPage {
     }
 
     public String getToastMessageRegister() {
-        String toastMessage = toast.getText();
-     return toastMessage;
+        return toast.getText();
     }
 
 }

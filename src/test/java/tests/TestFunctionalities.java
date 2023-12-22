@@ -39,7 +39,7 @@ public class TestFunctionalities extends TestBase {
         assertTrue(postPage.isUrlLoaded(), "Url is not loaded!");
         postPage.uploadImage(uplPic);
         assertEquals(postPage.getImageName(), uplPic.getName());
-        postPage.addCaption(postCaption);
+        postPage.addCaption();
         postPage.clickOnSwitchButton();
         postPage.clickSubmitButton();
         ProfilePage profilePage = new ProfilePage(super.getDriver());

@@ -26,9 +26,4 @@ public class ProfilePage {
         return wait.until(ExpectedConditions.urlContains(ProfilePage.PROFILE_URL));
     }
 
-    public String getToastMessage() {
-        String toastMessage = toast.getText();
-        return toastMessage;
-    }
-
 }
