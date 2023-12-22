@@ -8,7 +8,7 @@ import static org.testng.Assert.*;
 public class TestFunctionalities extends TestBase {
 
     @Test(dataProvider = "loginData", dataProviderClass = TestBase.class)
-    public void testLogin(String username, String password, File uplPic, String postCaption) {
+    public void testLogin(String username, String password) {
 
         HomePage homePage = new HomePage(super.getDriver());
         homePage.clickLogin();
@@ -20,7 +20,7 @@ public class TestFunctionalities extends TestBase {
 
     }
 
-    @Test(dataProvider = "loginData", dataProviderClass = TestBase.class)
+    @Test(dataProvider = "loginData" + "createPostData", dataProviderClass = TestBase.class)
     public void createNewPost(String username, String password, File uplPic, String postCaption) {
 
         HomePage homePage = new HomePage(super.getDriver());

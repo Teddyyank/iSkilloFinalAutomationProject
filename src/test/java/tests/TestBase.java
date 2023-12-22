@@ -51,12 +51,11 @@ public class TestBase {
         }
     }
 
-
     @DataProvider(name = "loginData")
     public Object[][] loginData() {
         File uplPic = new File("src\\main\\resources\\upload\\24fa34c3b1bbc7fd47d4ac87d32aa08d.jpg");
         String postCaption = "Image description";
-        return new Object[][]{{"Teddy123", "test123", uplPic, postCaption},};
+        return new Object[][]{{"Teddy123", "test123", uplPic, postCaption },};
     }
 
     private void takeScreenshot(ITestResult takeResult) {
