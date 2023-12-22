@@ -73,9 +73,9 @@ public class HomePage {
 
 
     public String getToastMessage() {
-        return toast.getText();
+        String toastMessage = toast.getText();
+        return toastMessage;
     }
-
 
 }
 

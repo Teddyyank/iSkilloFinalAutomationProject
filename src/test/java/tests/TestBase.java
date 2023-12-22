@@ -43,13 +43,13 @@ public class TestBase {
 
     }
 
-//    @AfterMethod
-//    public void tearDown(ITestResult testResult) {
-//        takeScreenshot(testResult);
-//        if (driver != null) {
-//            driver.quit();
-//        }
-//    }
+    @AfterMethod
+    public void tearDown(ITestResult testResult) {
+        takeScreenshot(testResult);
+        if (driver != null) {
+            driver.quit();
+        }
+    }
 
 
     @DataProvider(name = "loginData")
@@ -65,7 +65,6 @@ public class TestBase {
             try {
                 TakesScreenshot takesScreenshot = (TakesScreenshot) driver;
                 File screenshot = takesScreenshot.getScreenshotAs(OutputType.FILE);
-             //   String testName = takeResult.getTestName();
                 FileUtils.copyFile(screenshot, imgFile);
             } catch (IOException e) {
                 System.out.println("Unable to create screenshot file: " + e.getMessage());

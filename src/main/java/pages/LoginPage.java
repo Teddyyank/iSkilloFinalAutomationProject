@@ -71,7 +71,8 @@ public class LoginPage {
     }
 
     public String getToastMessage() {
-        return toast.getText();
+        String toastMessage = toast.getText();
+        return toastMessage;
     }
 
     public void clickSignInButton() {

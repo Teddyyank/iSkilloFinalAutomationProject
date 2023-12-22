@@ -112,7 +112,7 @@ public class TestFunctionalities extends TestBase {
 
     }
 
-    //test failure - screenshot
+    //test failure - demonstrate taking a screenshot
     @Test
     public void testLoginWithoutEnteringCredentials() {
 
@@ -121,7 +121,6 @@ public class TestFunctionalities extends TestBase {
         LoginPage loginPage = new LoginPage(getDriver());
         loginPage.clickSignInButton();
         assertEquals("Successful login!", loginPage.getToastMessage());
-
 
     }
 

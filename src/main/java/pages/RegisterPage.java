@@ -56,13 +56,14 @@ public class RegisterPage {
     }
 
 
-    public boolean isURLRegister() {
+    public void isURLRegister() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        return wait.until((ExpectedConditions.urlToBe(REGISTER_URL)));
+        wait.until((ExpectedConditions.urlToBe(REGISTER_URL)));
     }
 
     public String getToastMessageRegister() {
-        return toast.getText();
+        String toastMessage = toast.getText();
+        return toastMessage;
     }
 
 }
