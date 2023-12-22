@@ -17,6 +17,9 @@ public class HomePage {
     @FindBy(xpath = "//*[@id='nav-link-login']")
     private WebElement loginButton;
 
+    @FindBy(xpath = "//*[@id=\"navbarColor01\"]/ul[2]/li/a")
+    private WebElement logoutButton;
+
     @FindBy(xpath = "(//div[@class='post-feed-img'])[1]")
     private WebElement likeFirstPost;
 
@@ -45,6 +48,11 @@ public class HomePage {
 
     public void clickLogin() {
         loginButton.click();
+    }
+
+    public void clickLogoutButton() {
+        logoutButton.click();
+
     }
 
     public void clickOnTheFirstPost() {
@@ -76,6 +84,7 @@ public class HomePage {
         String toastMessage = toast.getText();
         return toastMessage;
     }
+
 
 }
 

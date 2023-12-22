@@ -13,8 +13,9 @@ public class TestFunctionalities extends TestBase {
         HomePage homePage = new HomePage(super.getDriver());
         homePage.clickLogin();
         LoginPage loginPage = new LoginPage(getDriver());
-        assertTrue(loginPage.isUserLoggedIn());
+        assertTrue(loginPage.isUrlLoaded());
         loginPage.login(username, password);
+        loginPage.waitUsernameField();
         assertEquals("Successful login!", loginPage.getToastMessage());
 
     }
@@ -25,7 +26,7 @@ public class TestFunctionalities extends TestBase {
         HomePage homePage = new HomePage(super.getDriver());
         homePage.clickLogin();
         LoginPage loginPage = new LoginPage(getDriver());
-        assertTrue(loginPage.isUserLoggedIn());
+        assertTrue(loginPage.isUrlLoaded());
         loginPage.login(username, password);
         assertEquals("Successful login!", loginPage.getToastMessage());
 
@@ -40,8 +41,7 @@ public class TestFunctionalities extends TestBase {
         postPage.clickOnSwitchButton();
         postPage.clickSubmitButton();
         ProfilePage profilePage = new ProfilePage(super.getDriver());
-        assertTrue(profilePage.isUrlLoaded(), "Url is not loaded");
-
+        assertTrue(profilePage.isUrlLoaded(), "url is not navigated to profile page");
     }
 
 
@@ -51,10 +51,12 @@ public class TestFunctionalities extends TestBase {
         HomePage homePage = new HomePage(super.getDriver());
         homePage.clickLogin();
         LoginPage loginPage = new LoginPage(super.getDriver());
-        assertTrue(loginPage.isUserLoggedIn());
+        assertTrue(loginPage.isUrlLoaded());
         loginPage.login(username, password);
-        homePage.clickLogin();
-        assertEquals("Successful login!", loginPage.getToastMessage());
+        homePage.clickLogoutButton();
+        homePage.getToastMessage();
+        assertEquals("Successful logout!\n" +
+                "Successful login!", loginPage.getToastMessage());
 
     }
 
@@ -78,7 +80,7 @@ public class TestFunctionalities extends TestBase {
         HomePage homePage = new HomePage(super.getDriver());
         homePage.clickLogin();
         LoginPage loginPage = new LoginPage(super.getDriver());
-        assertTrue(loginPage.isUserLoggedIn());
+        assertTrue(loginPage.isUrlLoaded());
         loginPage.enterWrongCredentials();
         assertEquals("User not found", loginPage.getToastMessage());
 

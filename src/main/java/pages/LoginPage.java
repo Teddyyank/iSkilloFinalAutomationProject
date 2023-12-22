@@ -61,7 +61,7 @@ public class LoginPage {
         singInButton.click();
     }
 
-    public boolean isUserLoggedIn() {
+    public boolean isUrlLoaded() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         return wait.until(ExpectedConditions.urlToBe(LoginPage.PAGE_URL));
     }
