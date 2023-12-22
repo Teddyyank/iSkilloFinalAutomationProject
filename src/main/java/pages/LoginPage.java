@@ -18,6 +18,9 @@ public class LoginPage {
     @FindBy(id = "defaultLoginFormUsername")
     private WebElement usernameInput;
 
+    @FindBy(id = "defaultLoginFormUsername")
+    private WebElement usernamePopulated;
+
     @FindBy(id = "defaultLoginFormPassword")
     private WebElement passwordInput;
 
@@ -38,11 +41,18 @@ public class LoginPage {
         PageFactory.initElements(driver,this);
     }
 
+
+
     public void login(String username, String password) {
         usernameInput.sendKeys(username);
         passwordInput.sendKeys(password);
         rememberMeCheckbox.click();
         singInButton.click();
+    }
+
+    public void waitUsernameField(String text) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.textToBePresentInElementValue(usernamePopulated, "Teddy123"));
     }
 
     public void enterWrongCredentials() {

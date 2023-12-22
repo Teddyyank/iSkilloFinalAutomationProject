@@ -14,6 +14,9 @@ public class HomePage {
     public static final String HOME_URL = "http://training.skillo-bg.com:4200/posts/all";
     private WebDriver driver;
 
+    @FindBy(xpath = "//*[@id='nav-link-login']")
+    private WebElement loginButton;
+
     @FindBy(xpath = "(//div[@class='post-feed-img'])[1]")
     private WebElement likeFirstPost;
 
@@ -40,8 +43,8 @@ public class HomePage {
         return wait.until(ExpectedConditions.urlToBe(HomePage.HOME_URL));
     }
 
-    public void navigateTo() {
-        this.driver.get(HOME_URL);
+    public void clickLogin() {
+        loginButton.click();
     }
 
     public void clickOnTheFirstPost() {

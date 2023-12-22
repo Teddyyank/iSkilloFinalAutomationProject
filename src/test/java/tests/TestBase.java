@@ -6,14 +6,13 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.PageFactory;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
-import pages.LoginPage;
-
 import java.io.File;
 import java.io.IOException;
 import java.time.Duration;
+
+import static pages.HomePage.HOME_URL;
 
 public class TestBase {
     private WebDriver driver;
@@ -41,13 +40,9 @@ public class TestBase {
         this.driver.manage().window().maximize();
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        driver.get("http://training.skillo-bg.com:4200/users/login");
+        driver.get(HOME_URL);
 
-        //Page Factory elements initialization
-        LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
     }
-
-    // public void logInUser
 
     @AfterMethod
     public void tearDown(ITestResult testResult) {

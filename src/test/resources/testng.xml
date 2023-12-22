@@ -1,11 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-
-<suite name="DefaultSuite">
-<test name="tests.TestFunctionalities">
-    <packages>
-        <package name="tests">
-        </package>
-    </packages>
-</test>
+<suite name="Test project all tests in one xml file">
+    <test name="TestFunctionalities">
+        <classes>
+            <class name="tests.TestFunctionalities">
+                <methods>
+                    <include name="testLogin"/>
+                    <include name="createNewPost"/>
+                    <include name="testLogOut"/>
+                    <include name="testLikeAPostWithoutLogin"/>
+                    <include name="testLoginWithWrongUsername"/>
+                    <include name="testViewProfileWithoutLogin"/>
+                    <include name="testRegisterNewUser"/>
+                    <include name="testLoginWithoutEnteringCredentials"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 </suite>
-

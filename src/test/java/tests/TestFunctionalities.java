@@ -1,9 +1,7 @@
 package tests;
 
-import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.*;
-import tests.TestBase;
 
 import java.io.File;
 
@@ -14,9 +12,12 @@ public class TestFunctionalities extends TestBase {
     @Test(dataProvider = "loginData", dataProviderClass = TestBase.class)
     public void testLogin(String username, String password, File uplPic, String postCaption) {
 
+        HomePage homePage = new HomePage(super.getDriver());
+        homePage.clickLogin();
         LoginPage loginPage = new LoginPage(getDriver());
         assertTrue(loginPage.isUserLoggedIn(), "Url is different!");
         loginPage.login(username, password);
+        loginPage.waitUsernameField("Teddy123");
         assertEquals("Successful login!", loginPage.getToastMessage());
 
     }
@@ -24,6 +25,8 @@ public class TestFunctionalities extends TestBase {
     @Test(dataProvider = "loginData", dataProviderClass = TestBase.class)
     public void createNewPost(String username, String password, File uplPic, String postCaption) {
 
+        HomePage homePage = new HomePage(super.getDriver());
+        homePage.clickLogin();
         LoginPage loginPage = new LoginPage(getDriver());
         assertTrue(loginPage.isUserLoggedIn());
         loginPage.login(username, password);
@@ -48,14 +51,13 @@ public class TestFunctionalities extends TestBase {
     @Test(dataProvider = "loginData", dataProviderClass = TestBase.class)
     public void testLogOut(String username, String password, File uplPic, String postCaption) {
 
-        LoginPage loginPage = new LoginPage(getDriver());
+        HomePage homePage = new HomePage(super.getDriver());
+        homePage.clickLogin();
+        LoginPage loginPage = new LoginPage(super.getDriver());
         assertTrue(loginPage.isUserLoggedIn());
         loginPage.login(username, password);
-
-        Header header = new Header(getDriver());
-        header.clickLogout();
-        assertEquals("Successful logout!\n" +
-                "Successful login!", loginPage.getToastMessage());
+        homePage.clickLogin();
+        assertEquals("Successful login!", loginPage.getToastMessage());
 
     }
 
@@ -63,7 +65,6 @@ public class TestFunctionalities extends TestBase {
     public void testLikeAPostWithoutLogin() {
 
         HomePage homePage = new HomePage(super.getDriver());
-        homePage.navigateTo();
         assertTrue(homePage.isUrlLoaded());
         homePage.clickOnTheFirstPost();
         assertTrue(homePage.isVisibleCommentField(), "Comment field is not visible!");
@@ -77,6 +78,8 @@ public class TestFunctionalities extends TestBase {
     @Test
     public void testLoginWithWrongUsername() {
 
+        HomePage homePage = new HomePage(super.getDriver());
+        homePage.clickLogin();
         LoginPage loginPage = new LoginPage(super.getDriver());
         assertTrue(loginPage.isUserLoggedIn());
         loginPage.enterWrongCredentials();
@@ -89,7 +92,6 @@ public class TestFunctionalities extends TestBase {
     public void testViewProfileWithoutLogin() {
 
         HomePage homePage = new HomePage(super.getDriver());
-        homePage.navigateTo();
         assertTrue(homePage.isUrlLoaded());
         homePage.clickOnFirstUserName();
         assertEquals("You must be logged in in order to see this page!", homePage.getToastMessage());
@@ -100,6 +102,8 @@ public class TestFunctionalities extends TestBase {
     @Test
     public void testRegisterNewUser() {
 
+        HomePage homePage = new HomePage(super.getDriver());
+        homePage.clickLogin();
         LoginPage loginPage = new LoginPage(super.getDriver());
         loginPage.clickRegister();
 
@@ -114,10 +118,11 @@ public class TestFunctionalities extends TestBase {
     @Test
     public void testLoginWithoutEnteringCredentials() {
 
+        HomePage homePage = new HomePage(super.getDriver());
+        homePage.clickLogin();
         LoginPage loginPage = new LoginPage(getDriver());
         loginPage.clickSignInButton();
-        assertEquals("Successful login!!", loginPage.getToastMessage());
-
+        assertEquals("Successful login!", loginPage.getToastMessage());
 
 
     }
