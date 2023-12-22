@@ -8,19 +8,18 @@ import static org.testng.Assert.*;
 public class TestFunctionalities extends TestBase {
 
     @Test(dataProvider = "loginData", dataProviderClass = TestBase.class)
-    public void testLogin(String username, String password) {
+    public void testLogin(String username, String password, File uplPic,String postCaption) {
 
         HomePage homePage = new HomePage(super.getDriver());
         homePage.clickLogin();
         LoginPage loginPage = new LoginPage(getDriver());
-        assertTrue(loginPage.isUserLoggedIn(), "Url is different!");
+        assertTrue(loginPage.isUserLoggedIn());
         loginPage.login(username, password);
-        loginPage.waitUsernameField();
         assertEquals("Successful login!", loginPage.getToastMessage());
 
     }
 
-    @Test(dataProvider = "loginData" + "createPostData", dataProviderClass = TestBase.class)
+    @Test(dataProvider = "loginData", dataProviderClass = TestBase.class)
     public void createNewPost(String username, String password, File uplPic, String postCaption) {
 
         HomePage homePage = new HomePage(super.getDriver());
