@@ -7,16 +7,11 @@ import org.openqa.selenium.support.PageFactory;
 
 
 public class Header {
-    private final WebDriver driver;
-
-    @FindBy(id = "nav-link-profile")
-    private static WebElement profileLink;
+    public WebDriver driver;
 
     @FindBy(id = "nav-link-new-post")
     private WebElement newPostButton;
 
-    @FindBy(xpath = "//*[@class='fas fa-sign-out-alt fa-lg']")
-    private static WebElement logoutButton;
 
     public Header(WebDriver driver) {
         this.driver = driver;
@@ -25,8 +20,5 @@ public class Header {
 
     public void clickNewPost() { newPostButton.click();}
 
-    public static void clickLogout() {
-        logoutButton.click();
-    }
 
 }

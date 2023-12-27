@@ -1,6 +1,5 @@
 package pages;
 
-import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -39,21 +38,15 @@ public class RegisterPage {
         PageFactory.initElements(driver, this);
     }
 
-    public void registerNewUser() {
-        userNameField.sendKeys(generateRandomAlphabeticString(7, 7));
-        emailField.sendKeys(generateRandomEmail(7, 8));
-        passwordField.sendKeys("test123");
-        confirmPassField.sendKeys("test123");
+    public void registerNewUser(String userName, String email, String password, String confirmPassword) {
+        userNameField.sendKeys(userName);
+        emailField.sendKeys(email);
+        passwordField.sendKeys(password);
+        confirmPassField.sendKeys(confirmPassword);
         singInButton.click();
     }
 
-    public String generateRandomEmail(int minLengthInclusive, int maxLengthInclusive) {
-        return generateRandomAlphabeticString(minLengthInclusive, maxLengthInclusive) + "@gmail.com";
-    }
 
-    private String generateRandomAlphabeticString(int minLengthInclusive, int maxLengthInclusive) {
-        return RandomStringUtils.randomAlphanumeric(minLengthInclusive, maxLengthInclusive);
-    }
 
 
     public void isURLRegister() {

@@ -1,13 +1,13 @@
 package pages;
 
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
 import java.time.Duration;
+import java.util.List;
 
 
 public class HomePage {
@@ -17,11 +17,11 @@ public class HomePage {
     @FindBy(xpath = "//*[@id='nav-link-login']")
     private WebElement loginButton;
 
-    @FindBy(xpath = "//*[@id=\"navbarColor01\"]/ul[2]/li/a")
+    @FindBy(xpath = "//*[@class='fas fa-sign-out-alt fa-lg']")
     private WebElement logoutButton;
 
-    @FindBy(xpath = "(//div[@class='post-feed-img'])[1]")
-    private WebElement likeFirstPost;
+    @FindBy(className = "post-feed-img")
+    private WebElement selectFirstPost;
 
     @FindBy(xpath = "//*[@class='like far fa-heart fa-2x']")
     private WebElement selectLikeButton;
@@ -33,7 +33,10 @@ public class HomePage {
     private WebElement toast;
 
     @FindBy(xpath = "(//a[@class='post-user'])[1]")
-    private WebElement selectFirstUserName;
+    private WebElement selectFirstUsername;
+
+//    @FindBy(css = "a.post-user[_ngcontent-qlu-c7]")
+//    private List<WebElement> listUsers;
 
 
     public HomePage(WebDriver driver) {
@@ -52,16 +55,15 @@ public class HomePage {
 
     public void clickLogoutButton() {
         logoutButton.click();
-
     }
 
     public void clickOnTheFirstPost() {
-        likeFirstPost.click();
+        selectFirstPost.click();
     }
 
     public void clickOnLikeButton() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.elementToBeClickable(likeFirstPost));
+        wait.until(ExpectedConditions.elementToBeClickable(selectFirstPost));
         selectLikeButton.click();
     }
 
@@ -75,15 +77,25 @@ public class HomePage {
         }
     }
 
-    public void clickOnFirstUserName() {
-        selectFirstUserName.click();
-    }
-
-
     public String getToastMessage() {
         String toastMessage = toast.getText();
         return toastMessage;
     }
+
+    public void clickOnUserName() {
+        selectFirstUsername.click();
+    }
+
+
+//    public void clickOnFirstPostUserLink() {
+//        if (!listUsers.isEmpty()) {
+//            WebElement firstUser = listUsers.get(0);
+//            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+//            wait.until(ExpectedConditions.elementToBeClickable(firstUser));
+//            firstUser.click();
+//            wait.until(ExpectedConditions.elementToBeSelected(firstUser));
+//        }
+//    }
 
 
 }

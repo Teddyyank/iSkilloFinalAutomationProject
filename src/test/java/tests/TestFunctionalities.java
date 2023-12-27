@@ -3,12 +3,14 @@ package tests;
 import org.testng.annotations.Test;
 import pages.*;
 import java.io.File;
+
+
 import static org.testng.Assert.*;
 
 public class TestFunctionalities extends TestBase {
 
     @Test(dataProvider = "loginData", dataProviderClass = TestBase.class)
-    public void testLogin(String username, String password, File uplPic,String postCaption) {
+    public void testLogin(String username, String password, File ignoreUplPic,String ignorePostCaption) {
 
         HomePage homePage = new HomePage(super.getDriver());
         homePage.clickLogin();
@@ -37,7 +39,7 @@ public class TestFunctionalities extends TestBase {
         assertTrue(postPage.isUrlLoaded(), "Url is not loaded!");
         postPage.uploadImage(uplPic);
         assertEquals(postPage.getImageName(), uplPic.getName());
-        postPage.addCaption();
+        postPage.addCaption(postCaption);
         postPage.clickOnSwitchButton();
         postPage.clickSubmitButton();
         ProfilePage profilePage = new ProfilePage(super.getDriver());
@@ -46,7 +48,7 @@ public class TestFunctionalities extends TestBase {
 
 
     @Test(dataProvider = "loginData", dataProviderClass = TestBase.class)
-    public void testLogOut(String username, String password, File uplPic, String postCaption) {
+    public void testLogOut(String username, String password, File ignoreUplPic, String ignorePostCaption) {
 
         HomePage homePage = new HomePage(super.getDriver());
         homePage.clickLogin();
@@ -74,14 +76,14 @@ public class TestFunctionalities extends TestBase {
     }
 
 
-    @Test
-    public void testLoginWithWrongUsername() {
+    @Test (dataProvider = "wrongCredentials", dataProviderClass = TestBase.class)
+    public void testLoginWithWrongUsername(String username, String password) {
 
         HomePage homePage = new HomePage(super.getDriver());
         homePage.clickLogin();
         LoginPage loginPage = new LoginPage(super.getDriver());
         assertTrue(loginPage.isUrlLoaded());
-        loginPage.enterWrongCredentials();
+        loginPage.enterWrongCredentials(username, password);
         assertEquals("User not found", loginPage.getToastMessage());
 
     }
@@ -92,14 +94,14 @@ public class TestFunctionalities extends TestBase {
 
         HomePage homePage = new HomePage(super.getDriver());
         assertTrue(homePage.isUrlLoaded());
-        homePage.clickOnFirstUserName();
+        homePage.clickOnUserName();
         assertEquals("You must be logged in in order to see this page!", homePage.getToastMessage());
 
     }
 
 
-    @Test
-    public void testRegisterNewUser() {
+    @Test (dataProvider = "register", dataProviderClass = TestBase.class)
+    public void testRegisterNewUser(String userName, String email, String password, String confirmPassword) {
 
         HomePage homePage = new HomePage(super.getDriver());
         homePage.clickLogin();
@@ -108,7 +110,7 @@ public class TestFunctionalities extends TestBase {
 
         RegisterPage registerPage = new RegisterPage(super.getDriver());
         registerPage.isURLRegister();
-        registerPage.registerNewUser();
+        registerPage.registerNewUser(userName, email, password, confirmPassword);
         assertEquals("Successful register!", registerPage.getToastMessageRegister());
 
     }

@@ -52,8 +52,8 @@ public class PostPage {
         return uploadedPath.getAttribute("placeholder");
     }
 
-    public void addCaption() {
-        captionField.sendKeys("content added!");
+    public void addCaption(String postCaption) {
+        captionField.sendKeys(postCaption);
     }
 
     public void clickOnSwitchButton() {
@@ -62,11 +62,6 @@ public class PostPage {
 
     public void clickSubmitButton() {
         submitButton.click();
-    }
-
-    public String getToastMessage() {
-        String toastMessage = toast.getText();
-        return toastMessage;
     }
 
 

@@ -52,12 +52,12 @@ public class LoginPage {
 
     public void waitUsernameField() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.textToBePresentInElementValue(usernamePopulated, "Teddy123"));
+        wait.until(ExpectedConditions.visibilityOf(usernamePopulated));
     }
 
-    public void enterWrongCredentials() {
-        usernameInput.sendKeys("Teddy12345");
-        passwordInput.sendKeys("test123");
+    public void enterWrongCredentials(String username, String password) {
+        usernameInput.sendKeys(username);
+        passwordInput.sendKeys(password);
         singInButton.click();
     }
 
@@ -78,6 +78,5 @@ public class LoginPage {
     public void clickSignInButton() {
         singInButton.click();
     }
-
 
 }
